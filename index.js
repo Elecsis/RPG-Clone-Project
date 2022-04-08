@@ -8,14 +8,17 @@ canvas.height = 576;
 
 const collisionsMap = []
 
-for(let i=0; i<collisions.length; i+=70){
+for(let i=0; i <collisions.length; i += 70){
     collisionsMap.push(collisions.slice(i,70 + i))
 }
 
 
+
 class Boundary {
+    static width = 48
+    static height = 48
     constructor(position){
-        this.position = positaddion
+        this.position = position
         this.width = 48
         this.height = 48
     }
@@ -29,18 +32,19 @@ const  boundaries = []
 
 collisionsMap.forEach((rows,i)=>{
     rows.forEach((block,j) => {
+       if(block === 1025)
         boundaries.push(
            new Boundary({
                position: {
-               x: j * 48,
-               y: i * 48
+               x: j * Boundary.width,
+               y: i * Boundary.height
            }
            
         })
        )
     })
 })
-console.log(boundaries)
+
 
 
 
@@ -89,6 +93,9 @@ const controlKeys = {
 function animate(){
     window.requestAnimationFrame(animate)
     background.draw()
+    boundaries.forEach(redblock =>{
+        redblock.draw()
+    })
     ctx.drawImage(
         playerImg,
         0,//crop x position 
@@ -100,10 +107,10 @@ function animate(){
         playerImg.width / 4,//width of spirte
         playerImg.height// height of spirte
     )
-    if(controlKeys.w.pressed && lastKey ==='w') background.position.y += 3
-    else if(controlKeys.s.pressed && lastKey ==='s') background.position.y  -= 3
-    else if(controlKeys.a.pressed && lastKey ==='a') background.position.x  += 3
-    else if(controlKeys.d.pressed && lastKey ==='d') background.position.x  -= 3
+    if(controlKeys.w.pressed && lastKey ==='w') background.position.y += 2
+    else if(controlKeys.s.pressed && lastKey ==='s') background.position.y  -= 2
+    else if(controlKeys.a.pressed && lastKey ==='a') background.position.x  += 2
+    else if(controlKeys.d.pressed && lastKey ==='d') background.position.x  -= 2
 }
 
 
